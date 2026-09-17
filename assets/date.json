@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Android Icon",
+    "image": "android-icon-background.png",
+    "desc": "Android application icon background."
+  },
+  {
+    "id": 2,
+    "name": "Android Foreground",
+    "image": "android-icon-foreground.png",
+    "desc": "Android application icon foreground."
+  },
+  {
+    "id": 3,
+    "name": "Android Monochrome",
+    "image": "android-icon-monochrome.png",
+    "desc": "Monochrome Android application icon."
+  },
+  {
+    "id": 4,
+    "name": "Favicon",
+    "image": "favicon.png",
+    "desc": "Application favicon."
+  },
+  {
+    "id": 5,
+    "name": "App Icon",
+    "image": "icon.png",
+    "desc": "Main application icon."
+  },
+  {
+    "id": 6,
+    "name": "Splash Icon",
+    "image": "splash-icon.png",
+    "desc": "Icon displayed on the application splash screen."
+  }
+]
