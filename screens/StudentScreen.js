@@ -20,4 +20,7 @@ const styles = StyleSheet.create({
 
 });
 
+navigation.navigate("Challenge");
+
+
 export default StudentScreen;
