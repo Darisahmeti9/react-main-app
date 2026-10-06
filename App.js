@@ -26,7 +26,7 @@ import {
   Text,
   View,
   Dimensions,
-  TouchableWithoutFeedback,
+  TouchableOpacityWithoutFeedback,
   Image,
 } from "react-native";
 import Bird from "./src/components/Bird";
@@ -101,4 +101,83 @@ const jump = () => {
 }
 
 
-const styles = StyleSheet.create({});
+
+
+// Check for collisions
+useEffect(() => {
+  if (
+    ((birdBottom < (obstaclesNegHeight + obstacleHeight + 30) ||
+    birdBottom > (obstaclesNegHeight + obstacleHeight + gap - 30)) &&
+    (obstaclesLeft > screenWidth / 2 - 30 && obstaclesLeft < screenWidth / 2 + 30))
+    ||
+    ((birdBottom < (obstaclesNegHeightTwo + obstacleHeight + 30) ||
+    birdBottom > (obstaclesNegHeightTwo + obstacleHeight + gap - 30)) &&
+    (obstaclesLeftTwo > screenWidth / 2 - 30 && obstaclesLeftTwo < screenWidth / 2 + 30))
+    ||
+    birdBottom <= 0 // Also trigger game over if bird hits the floor
+  ) {
+    gameOver();
+  }
+});
+
+// Game over function
+const gameOver = () => {
+  clearInterval(gameTimerId.current);
+  clearInterval(obstaclesTimerId.current);
+  clearInterval(obstaclesTimerIdTwo.current);
+  setIsGameOver(true); // Uncommented to freeze the movement loops safely
+};
+
+return (
+  <TouchableOpacityWithoutFeedback onPress={jump}>
+    <View style={styles.container}>
+      <Image source={require('./assets/background.png')} style={styles.backgroundImage} />
+      <Text style={styles.score}>Score: {score}</Text>
+      <Bird
+        birdBottom={birdBottom}
+        birdLeft={birdLeft}
+      />
+      <Obstacle
+        color={'green'}
+        obstacleWidth={obstacleWidth}
+        obstacleHeight={obstacleHeight}
+        randomBottom={obstaclesNegHeight}
+        gap={gap}
+        obstaclesLeft={obstaclesLeft}
+      />
+      <Obstacle
+        color={'yellow'}
+        obstacleWidth={obstacleWidth}
+        obstacleHeight={obstacleHeight}
+        randomBottom={obstaclesNegHeightTwo}
+        gap={gap}
+        obstaclesLeft={obstaclesLeftTwo}
+      />
+    </View>
+  </TouchableOpacityWithoutFeedback>
+);
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  score: {
+    fontSize: 32,
+    top: 50,
+    position: 'absolute',
+    zIndex: 1,
+    color: 'white'
+  },
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  }
+});
+
